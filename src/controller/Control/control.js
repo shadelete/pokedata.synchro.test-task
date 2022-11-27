@@ -11,14 +11,14 @@ export const init = () => {
         clear	: 	document.querySelector('#clear'),
         async addCard() {
             const wrapper = document.getElementById('main-wrapper')
-            wrapper.appendChild(createNewCard('',preloader))
+            wrapper.appendChild(createNewCard([{picture:preloader}]))
             const res = await getData();
             pokeData.push({
                 name: res.name,
                 picture: res.sprites.back_default
             })
             wrapper.removeChild(wrapper.lastChild)
-            wrapper.appendChild(createNewCard(pokemonSpecs.name,pokemonSpecs.imgUrl))
+            wrapper.appendChild(createNewCard(pokeData))
         },
         initControl() {
             this.add.addEventListener('click',this.addCard,false);
