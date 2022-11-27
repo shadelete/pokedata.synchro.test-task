@@ -2,58 +2,83 @@ import {getData} from "../../api/api.js";
 import {createNewCard} from "../../elements/card/index.js";
 import preloader from "../../assets/img/preloader.svg"
 import {pokeData} from "../../data/pokeData.js";
+import {concatArrays} from "../../services/concatArrays.js";
 
 export const init = () => {
-     const Control = {
+    const container = document.getElementById('main-wrapper');
+
+    const Control = {
         add		: 	document.querySelector('#add'),
         del		: 	document.querySelector('#del'),
         fill	: 	document.querySelector('#fill'),
         clear	: 	document.querySelector('#clear'),
         async addCard() {
-            const wrapper = document.getElementById('main-wrapper')
-            wrapper.appendChild(createNewCard([{picture:preloader}]))
+            container.appendChild(createNewCard([{picture:preloader}]))
             const res = await getData();
             pokeData.push({
                 name: res.name,
                 picture: res.sprites.back_default
             })
-            wrapper.removeChild(wrapper.lastChild)
-            wrapper.appendChild(createNewCard(pokeData))
+            container.removeChild(container.lastChild)
+            container.appendChild(createNewCard({name:res.name,picture: res.sprites.back_default}))
+
+            localStorage.setItem("data",
+                localStorage.data === undefined
+                    ||
+                localStorage.length === 0
+                ? JSON.stringify(pokeData)
+                : JSON.stringify(concatArrays(JSON.parse(localStorage.data),[{name:res.name,picture: res.sprites.back_default}]))
+            );
+        },
+        deleteCard() {
+            localStorage.setItem("data",JSON.stringify(JSON.parse(localStorage.data).slice(0, -1)));
+            container.removeChild(container.lastChild)
+        },
+        clearCards() {
+            pokeData.length = 0
+            localStorage.clear();
+            container.innerHTML = ''
+        },
+        async fillCards() {
+
+            const cards_wrapperHeight = container.offsetHeight;
+            const card = document.querySelector('.card')
+            const cardHeight = card.offsetHeight;
+
+            // if ((cards_wrapperHeight-(cardHeight*3)) < cardHeight) {
+            //     return 0;
+            // } else {
+            //     await addCard();
+            //     fillCard();
+            // }
+
+        },
+        loadDataFromLocalStorage(data) {
+            for(let i=0;i<data.length;i++){
+                container.appendChild(createNewCard(data[i]))
+            }
+        },
+        initStorage() {
+          const storage = JSON.parse(localStorage.data);
+          console.log(storage);
+
+          this.loadDataFromLocalStorage(storage);
         },
         initControl() {
             this.add.addEventListener('click',this.addCard,false);
+            this.fill.addEventListener('click',this.fillCards,false);
+            this.clear.addEventListener('click',this.clearCards,false);
+            this.del.addEventListener('click',this.deleteCard,false);
         }
     }
-    Control.initControl();
+    return Control;
 }
 
-// const deleteCard = () => {
-//     const cards_wrapper = document.getElementById('main-wrapper');
-//     cards_wrapper.removeChild(cards_wrapper.lastElementChild)
-// }
-//
-// const clearCards = () => {
-//     const cards_wrapper = document.getElementById('main-wrapper');
-//     cards_wrapper.innerHTML = ''
-// }
 
-const fillCards = async () => {
-    const cards_wrapper = document.getElementById('main-wrapper');
 
-    const cards_wrapperHeight = cards_wrapper.offsetHeight;
-    const card = document.querySelector('.card')
-    const cardHeight = card.offsetHeight;
 
-    if ((cards_wrapperHeight-(cardHeight*3)) < cardHeight) {
-        return 0;
-    } else {
-        await addCard();
-        fillCard();
-    }
 
-}
-//
-// Control.fill.addEventListener('click',fillCards,false)
-// Control.clear.addEventListener('click',clearCards,false)
-// Control.del.addEventListener('click',deleteCard,false)
+
+
+
 
