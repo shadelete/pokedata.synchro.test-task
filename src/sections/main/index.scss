@@ -1,0 +1,18 @@
+.main {
+  &-wrapper {
+    min-height: 90vh;
+    min-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+  &-card {
+    text-align: center;
+    border-radius: .5rem;
+    padding: 1rem;
+    background-color: #8CC83A;
+    flex-basis: 20%;
+  }
+}
