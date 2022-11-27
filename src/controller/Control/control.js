@@ -3,6 +3,7 @@ import {createNewCard} from "../../elements/card/index.js";
 import preloader from "../../assets/img/preloader.svg"
 import {pokeData} from "../../data/pokeData.js";
 import {concatArrays} from "../../services/concatArrays.js";
+import {createModal} from "../../elements/modal/index.js";
 
 export const init = () => {
     const container = document.getElementById('main-wrapper');
@@ -16,18 +17,19 @@ export const init = () => {
             container.appendChild(createNewCard([{picture:preloader}]))
             const res = await getData();
             pokeData.push({
+                id: res.id,
                 name: res.name,
                 picture: res.sprites.back_default
             })
             container.removeChild(container.lastChild)
-            container.appendChild(createNewCard({name:res.name,picture: res.sprites.back_default}))
+            container.appendChild(createNewCard({id:res.id,name:res.name,picture: res.sprites.back_default}))
 
             localStorage.setItem("data",
                 localStorage.data === undefined
                     ||
                 localStorage.length === 0
                 ? JSON.stringify(pokeData)
-                : JSON.stringify(concatArrays(JSON.parse(localStorage.data),[{name:res.name,picture: res.sprites.back_default}]))
+                : JSON.stringify(concatArrays(JSON.parse(localStorage.data),[{id: res.id,name:res.name,picture: res.sprites.back_default}]))
             );
         },
         deleteCard() {
@@ -65,6 +67,15 @@ export const init = () => {
           this.loadDataFromLocalStorage(storage);
         },
         initControl() {
+            const cards = document.querySelectorAll('.card');
+
+            cards.forEach(card=>{
+                card.addEventListener('click',(e)=>{
+                    e.preventDefault();
+                    createModal(e.currentTarget.getAttribute("id"))
+                })
+            })
+
             this.add.addEventListener('click',this.addCard,false);
             this.fill.addEventListener('click',this.fillCards,false);
             this.clear.addEventListener('click',this.clearCards,false);
