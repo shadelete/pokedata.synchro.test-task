@@ -13,19 +13,10 @@ export const init = () => {
             const wrapper = document.getElementById('main-wrapper')
             wrapper.appendChild(createNewCard('',preloader))
             const res = await getData();
-
-            const pokemonSpecs = {
-                name: res.name,
-                imgUrl: res.sprites.back_default
-            }
-
             pokeData.push({
                 name: res.name,
-                imgUrl: res.sprites.back_default
+                picture: res.sprites.back_default
             })
-
-            console.log(pokeData)
-
             wrapper.removeChild(wrapper.lastChild)
             wrapper.appendChild(createNewCard(pokemonSpecs.name,pokemonSpecs.imgUrl))
         },
