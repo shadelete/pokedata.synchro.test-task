@@ -68,8 +68,6 @@ export const init = () => {
         },
         initStorage() {
           const storage = JSON.parse(localStorage.data);
-          console.log(storage);
-
           this.loadDataFromLocalStorage(storage);
         },
         initControl() {

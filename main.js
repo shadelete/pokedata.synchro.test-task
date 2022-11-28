@@ -1,6 +1,6 @@
 import './style.css'
 import {Header} from "./src/components/Header/index.js";
-import {Main} from "./src/sections/main/index.js";
+import {Main} from "./src/components/Main/index.js";
 import {compose} from "./src/services/compose.js";
 import {init} from "./src/controller/Control/control.js";
 
@@ -17,11 +17,8 @@ window.onload = () => {
 
 const App = document.querySelector('#app');
 
-console.log(Header)
-console.log(Main)
-
 App.appendChild(Header());
-App.appendChild(Main);
+App.appendChild(Main());
 
 
 
