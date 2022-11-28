@@ -6,9 +6,6 @@ import {pokeData} from "../../data/pokeData.js";
 import {concatArrays} from "../../services/concatArrays.js";
 
 export const addCard = async () => {
-
-    console.log('addCard working');
-
     const container = document.getElementById('main-wrapper');
 
     container.appendChild(createNewCard({picture:preloader}))
@@ -29,6 +26,12 @@ export const addCard = async () => {
         ||
         localStorage.length === 0
             ? JSON.stringify(pokeData)
-            : JSON.stringify(concatArrays(JSON.parse(localStorage.data),[{id: res.id,name:res.name,picture: res.sprites.back_default}]))
+            : JSON.stringify(concatArrays(JSON.parse(localStorage.data),[{id: res.id,name:res.name,picture: res.sprites.front_default}]))
     );
+}
+
+export const deleteCard = () => {
+    const container = document.getElementById('main-wrapper');
+    localStorage.setItem("data",JSON.stringify(JSON.parse(localStorage.data).slice(0, -1)));
+    container.removeChild(container.lastChild)
 }

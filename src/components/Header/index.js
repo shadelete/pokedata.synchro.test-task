@@ -1,5 +1,5 @@
 import './style.scss'
-import {addCard} from "./buttonsFunctions.js";
+import {addCard, deleteCard} from "./buttonsFunctions.js";
 import {template} from "./headetTemplate.js";
 
 function createButton (text,id,event) {
@@ -17,6 +17,7 @@ export const Header = () => {
     header.classList.add('header');
 
     const add = new createButton('add','add',addCard);
+    const del = new createButton('del','del',deleteCard);
 
 
     header.innerHTML = template;
@@ -24,6 +25,7 @@ export const Header = () => {
     const buttonWrapper = header.querySelector('.header-menu');
 
     buttonWrapper.appendChild(add)
+    buttonWrapper.appendChild(del)
 
     return header;
 }

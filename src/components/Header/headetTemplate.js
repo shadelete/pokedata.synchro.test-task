@@ -3,7 +3,6 @@ export const template = `
               <div class="header-wrapper">
                 <div class="header-menu">
                   <button id="fill">Fill</button>
-                  <button id="del">Delete</button>
                   <button id="clear">Clear</button>
                 </div>			
               </div>

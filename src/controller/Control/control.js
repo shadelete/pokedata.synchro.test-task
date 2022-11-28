@@ -9,14 +9,9 @@ export const init = () => {
     const container = document.getElementById('main-wrapper');
 
     const Control = {
-        del		: 	document.querySelector('#del'),
         fill	: 	document.querySelector('#fill'),
         clear	: 	document.querySelector('#clear'),
 
-        deleteCard() {
-            localStorage.setItem("data",JSON.stringify(JSON.parse(localStorage.data).slice(0, -1)));
-            container.removeChild(container.lastChild)
-        },
         clearCards() {
             pokeData.length = 0
             localStorage.clear();
@@ -54,7 +49,6 @@ export const init = () => {
         initControl() {
             this.fill.addEventListener('click',this.fillCards,false);
             this.clear.addEventListener('click',this.clearCards,false);
-            this.del.addEventListener('click',this.deleteCard,false);
         }
     }
     return Control;
