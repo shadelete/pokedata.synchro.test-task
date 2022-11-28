@@ -14,7 +14,7 @@ function ModalWindow() {
 function ModalInner(data) {
     const el = document.createElement('div');
     el.classList.add('modal-inner');
-    el.innerHTML = data;
+    el.innerHTML = data.outerHTML;
     return el;
 }
 

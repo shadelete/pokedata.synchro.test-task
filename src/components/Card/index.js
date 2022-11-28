@@ -1,6 +1,6 @@
 import './style.scss'
-import {createModalWindow} from "../modal/index.js";
 import {appendMultiplyChild} from "../../services/templates.js";
+import {DetailedCard} from "../DetailedCard/index.js";
 
 function Card(id) {
     const el = this.element = document.createElement('div');
@@ -8,7 +8,7 @@ function Card(id) {
     el.setAttribute("id",id || '')
     el.addEventListener('click',(e)=>{
         e.preventDefault();
-        createModalWindow(e.currentTarget.getAttribute("id"))
+        DetailedCard(e.currentTarget.getAttribute("id"))
     });
     return el;
 }
@@ -21,7 +21,7 @@ function CardName(name) {
 
 function CardImg(url) {
     const el = this.element = document.createElement('img');
-    el.src = url;
+    el.src = url || '';
     return el;
 }
 
@@ -35,6 +35,5 @@ export const createNewCard = (data) => {
 
     card.appendChild(wrapper);
 
-	  return card;
+    return card;
 }
-

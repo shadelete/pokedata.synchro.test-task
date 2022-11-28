@@ -1,9 +1,9 @@
 import {getData} from "../../api/api.js";
-import {createNewCard} from "../../elements/card/index.js";
 import preloader from "../../assets/img/preloader.svg"
 import {pokeData} from "../../data/pokeData.js";
 import {concatArrays} from "../../services/concatArrays.js";
 import {randomInt} from "../../services/random.js";
+import {createNewCard} from "../../components/Card/index.js";
 
 export const init = () => {
     const container = document.getElementById('main-wrapper');
@@ -19,10 +19,10 @@ export const init = () => {
             pokeData.push({
                 id: res.id,
                 name: res.name,
-                picture: res.sprites.back_default
+                picture: res.sprites.front_default
             })
             container.removeChild(container.lastChild)
-            container.appendChild(createNewCard({id:res.id,name:res.name,picture: res.sprites.back_default}))
+            container.appendChild(createNewCard({id:res.id,name:res.name,picture: res.sprites.front_default}))
 
             localStorage.setItem("data",
                 localStorage.data === undefined
