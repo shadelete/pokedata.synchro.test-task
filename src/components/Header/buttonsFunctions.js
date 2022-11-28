@@ -42,3 +42,24 @@ export const clearCards = () => {
     localStorage.clear();
     container.innerHTML = ''
 }
+
+export const fillCards = async () => {
+
+    const cards_wrapper = document.getElementById('main-wrapper');
+    const main = document.querySelector('.main');
+    const card = document.querySelector('.card')
+
+    // if (
+    //
+    //     (main.offsetHeight - (cards_wrapper.lastElementChild.getBoundingClientRect().top + card.clientHeight)) > card.clientHeight
+    //     ||
+    //     (main.offsetWidth - (cards_wrapper.lastElementChild.getBoundingClientRect().left + card.clientWidth)) > card.clientWidth
+    //
+    // ) {
+    //     await this.addCard();
+    //     this.fillCards();
+    // } else {
+    //     this.fill.removeEventListener();
+    // }
+
+}
