@@ -10,13 +10,6 @@ export const init = () => {
 
     const Control = {
         fill	: 	document.querySelector('#fill'),
-        clear	: 	document.querySelector('#clear'),
-
-        clearCards() {
-            pokeData.length = 0
-            localStorage.clear();
-            container.innerHTML = ''
-        },
         async fillCards() {
 
             const cards_wrapper = document.getElementById('main-wrapper');
@@ -48,7 +41,6 @@ export const init = () => {
         },
         initControl() {
             this.fill.addEventListener('click',this.fillCards,false);
-            this.clear.addEventListener('click',this.clearCards,false);
         }
     }
     return Control;

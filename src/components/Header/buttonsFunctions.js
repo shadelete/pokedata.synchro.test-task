@@ -35,3 +35,10 @@ export const deleteCard = () => {
     localStorage.setItem("data",JSON.stringify(JSON.parse(localStorage.data).slice(0, -1)));
     container.removeChild(container.lastChild)
 }
+
+export const clearCards = () => {
+    const container = document.getElementById('main-wrapper');
+    pokeData.length = 0
+    localStorage.clear();
+    container.innerHTML = ''
+}
