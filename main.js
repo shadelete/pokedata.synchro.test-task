@@ -4,7 +4,6 @@ import {Main} from "./src/components/Main/index.js";
 import {compose} from "./src/services/compose.js";
 import {init} from "./src/controller/Control/control.js";
 
-
 window.onload = () => {
 
     if (localStorage.length === 0 || localStorage.data === undefined) {
