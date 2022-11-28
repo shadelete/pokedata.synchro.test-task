@@ -1,8 +1,3 @@
-import {getData} from "../../api/api.js";
-import preloader from "../../assets/img/preloader.svg"
-import {pokeData} from "../../data/pokeData.js";
-import {concatArrays} from "../../services/concatArrays.js";
-import {randomInt} from "../../services/random.js";
 import {createNewCard} from "../../components/Card/index.js";
 
 export const init = () => {

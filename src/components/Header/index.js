@@ -20,7 +20,6 @@ export const Header = () => {
     const del   = new createButton('del','del',deleteCard);
     const clear  = new createButton('clear','clear',clearCards);
 
-
     header.innerHTML = template;
 
     const buttonWrapper = header.querySelector('.header-menu');
