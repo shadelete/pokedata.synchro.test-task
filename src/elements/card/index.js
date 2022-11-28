@@ -1,5 +1,5 @@
 import './style.scss'
-import {createModal} from "../modal/index.js";
+import {createModalWindow} from "../modal/index.js";
 
 export const createNewCard = (data) => {
     const card = document.createElement('div');
@@ -7,7 +7,7 @@ export const createNewCard = (data) => {
     card.classList.add('card');
     card.addEventListener('click',(e)=>{
         e.preventDefault();
-        createModal(e.currentTarget.getAttribute("id"))
+        createModalWindow(e.currentTarget.getAttribute("id"))
     })
 
     const card_name = document.createElement('h1');
