@@ -25,3 +25,4 @@ export const createModalWindow = (data) => {
     const body = document.querySelector('#app');
     body.appendChild(modalWindow)
 }
+

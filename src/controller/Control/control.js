@@ -3,7 +3,6 @@ import {createNewCard} from "../../elements/card/index.js";
 import preloader from "../../assets/img/preloader.svg"
 import {pokeData} from "../../data/pokeData.js";
 import {concatArrays} from "../../services/concatArrays.js";
-import {createModalWindow} from "../../elements/modal/index.js";
 import {randomInt} from "../../services/random.js";
 
 export const init = () => {

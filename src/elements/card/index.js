@@ -1,21 +1,40 @@
 import './style.scss'
 import {createModalWindow} from "../modal/index.js";
+import {appendMultiplyChild} from "../../services/templates.js";
 
-export const createNewCard = (data) => {
-    const card = document.createElement('div');
-    card.setAttribute("id",data.id || '')
-    card.classList.add('card');
-    card.addEventListener('click',(e)=>{
+function Card(id) {
+    const el = this.element = document.createElement('div');
+    el.classList.add('card');
+    el.setAttribute("id",id || '')
+    el.addEventListener('click',(e)=>{
         e.preventDefault();
         createModalWindow(e.currentTarget.getAttribute("id"))
-    })
-
-    const card_name = document.createElement('h1');
-    const card_img = document.createElement('img');
-
-    card_name.innerHTML = data.name || '';
-    card_img.src = data.picture;
-    card.appendChild(card_name);
-    card.appendChild(card_img);
-	return card;
+    });
+    return el;
 }
+
+function CardName(name) {
+    const el = this.element = document.createElement('h1');
+    el.innerHTML = name || '';
+    return el;
+}
+
+function CardImg(url) {
+    const el = this.element = document.createElement('img');
+    el.src = url;
+    return el;
+}
+
+export const createNewCard = (data) => {
+
+    const card      = new Card(data.id)
+    const cardName  = new CardName(data.name);
+    const cardImg   = new CardImg(data.picture);
+
+    const wrapper   = new appendMultiplyChild([cardName,cardImg])
+
+    card.appendChild(wrapper);
+
+	  return card;
+}
+
