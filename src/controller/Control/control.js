@@ -4,6 +4,7 @@ import preloader from "../../assets/img/preloader.svg"
 import {pokeData} from "../../data/pokeData.js";
 import {concatArrays} from "../../services/concatArrays.js";
 import {createModal} from "../../elements/modal/index.js";
+import {randomInt} from "../../services/random.js";
 
 export const init = () => {
     const container = document.getElementById('main-wrapper');
@@ -14,8 +15,8 @@ export const init = () => {
         fill	: 	document.querySelector('#fill'),
         clear	: 	document.querySelector('#clear'),
         async addCard() {
-            container.appendChild(createNewCard([{picture:preloader}]))
-            const res = await getData();
+            container.appendChild(createNewCard({picture:preloader}))
+            const res = await getData(randomInt(1,905));
             pokeData.push({
                 id: res.id,
                 name: res.name,
@@ -43,16 +44,22 @@ export const init = () => {
         },
         async fillCards() {
 
-            const cards_wrapperHeight = container.offsetHeight;
+            const cards_wrapper = document.getElementById('main-wrapper');
+            const main = document.querySelector('.main');
             const card = document.querySelector('.card')
-            const cardHeight = card.offsetHeight;
 
-            // if ((cards_wrapperHeight-(cardHeight*3)) < cardHeight) {
-            //     return 0;
-            // } else {
-            //     await addCard();
-            //     fillCard();
-            // }
+            if (
+
+                (main.offsetHeight - (cards_wrapper.lastElementChild.getBoundingClientRect().top + card.clientHeight)) > card.clientHeight
+                ||
+                (main.offsetWidth - (cards_wrapper.lastElementChild.getBoundingClientRect().left + card.clientWidth)) > card.clientWidth
+
+            ) {
+                await this.addCard();
+                this.fillCards();
+            } else {
+                this.fill.removeEventListener();
+            }
 
         },
         loadDataFromLocalStorage(data) {
@@ -67,15 +74,6 @@ export const init = () => {
           this.loadDataFromLocalStorage(storage);
         },
         initControl() {
-            const cards = document.querySelectorAll('.card');
-
-            cards.forEach(card=>{
-                card.addEventListener('click',(e)=>{
-                    e.preventDefault();
-                    createModal(e.currentTarget.getAttribute("id"))
-                })
-            })
-
             this.add.addEventListener('click',this.addCard,false);
             this.fill.addEventListener('click',this.fillCards,false);
             this.clear.addEventListener('click',this.clearCards,false);

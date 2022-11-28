@@ -14,9 +14,6 @@ window.onload = () => {
         compose(init().initStorage(),init().initControl())
     }
 
-
-
-
 }
 
 const App = document.querySelector('#app');
