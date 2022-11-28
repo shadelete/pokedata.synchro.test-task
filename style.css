@@ -35,4 +35,5 @@ button {
 .container {
   max-width: var(--basic-width);
   margin-inline: auto;
+  padding: 0 1rem;
 }

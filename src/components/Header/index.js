@@ -14,10 +14,11 @@ export const Header = () => {
     const header = document.createElement("header");
     header.classList.add('header');
 
-    const add   = new createButton('add','add',addCard);
-    const del   = new createButton('del','del',deleteCard);
-    const clear  = new createButton('clear','clear',clearCards);
-    const fill  = new createButton('fill','fill',fillCards);
+    const add           = new createButton('add','add',addCard);
+    const del           = new createButton('del','del',deleteCard);
+    const clear         = new createButton('clear','clear',clearCards);
+    const fill          = new createButton('fill','fill',fillCards);
+    const showHistory   = new createButton('history','history',);
 
     header.innerHTML = template;
 
@@ -27,6 +28,7 @@ export const Header = () => {
     buttonWrapper.appendChild(del)
     buttonWrapper.appendChild(clear)
     buttonWrapper.appendChild(fill)
+    buttonWrapper.appendChild(showHistory)
 
     return header;
 }
