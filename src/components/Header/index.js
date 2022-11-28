@@ -16,9 +16,9 @@ export const Header = () => {
     const header = document.createElement("header");
     header.classList.add('header');
 
-    const add = new createButton('add','add',addCard);
-    const del = new createButton('del','del',deleteCard);
-    const fill = new createButton('fill','fill',clearCards);
+    const add   = new createButton('add','add',addCard);
+    const del   = new createButton('del','del',deleteCard);
+    const clear  = new createButton('clear','clear',clearCards);
 
 
     header.innerHTML = template;
@@ -27,7 +27,7 @@ export const Header = () => {
 
     buttonWrapper.appendChild(add)
     buttonWrapper.appendChild(del)
-    buttonWrapper.appendChild(fill)
+    buttonWrapper.appendChild(clear)
 
     return header;
 }
