@@ -1,13 +1,11 @@
-import './style.css'
+import './style.scss'
 import {Header} from "./src/components/Header/index.js";
 import {Main} from "./src/components/Main/index.js";
 import {loadDataFromLocalStorage} from "./src/management/localStorage.js";
 
 window.onload = () => {
 
-    if (localStorage.length !== 0 || localStorage.data !== undefined) {
-        loadDataFromLocalStorage();
-    }
+    loadDataFromLocalStorage();
 
 }
 

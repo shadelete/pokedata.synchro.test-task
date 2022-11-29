@@ -7,9 +7,9 @@ export const Main = () => {
         `
             <div class="container">
               <div id="main-wrapper" class="main-wrapper">
-            
+                
               </div>	
-            </div>	
+            </div>
         `
     return main;
 }

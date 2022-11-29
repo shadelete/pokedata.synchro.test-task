@@ -1,9 +1,10 @@
 import './style.scss'
-import {addCard, clearCards, deleteCard, fillCards} from "./buttonsFunctions.js";
+import {addCard, clearCards, deleteCard, fillCards, showHistory} from "./buttonsFunctions.js";
 import {template} from "./headetTemplate.js";
 
 function createButton (text,id,event) {
     const el = this.element = document.createElement('button');
+    el.classList.add(id)
     el.innerHTML = text;
     el.setAttribute('id',id);
     el.addEventListener('click',event,false);
@@ -18,7 +19,7 @@ export const Header = () => {
     const del           = new createButton('del','del',deleteCard);
     const clear         = new createButton('clear','clear',clearCards);
     const fill          = new createButton('fill','fill',fillCards);
-    const showHistory   = new createButton('history','history',);
+    const history       = new createButton('history','history',showHistory);
 
     header.innerHTML = template;
 
@@ -28,7 +29,7 @@ export const Header = () => {
     buttonWrapper.appendChild(del)
     buttonWrapper.appendChild(clear)
     buttonWrapper.appendChild(fill)
-    buttonWrapper.appendChild(showHistory)
+    buttonWrapper.appendChild(history)
 
     return header;
 }

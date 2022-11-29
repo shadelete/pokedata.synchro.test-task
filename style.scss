@@ -1,8 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
+
 :root {
+  --succes: #268a3d;
+  --warning: #ffc107;
+  --danger: #dc3545;
 
   --basic-width: 1200px;
 
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Nunito',Inter, Avenir, Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
