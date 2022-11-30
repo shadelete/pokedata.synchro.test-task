@@ -1,11 +1,15 @@
 import './style.scss'
 import {Header} from "./src/components/Header/index.js";
 import {Main} from "./src/components/Main/index.js";
-import {loadDataFromLocalStorage} from "./src/management/localStorage.js";
+import {loadDataFromLocalStorage, setEmptyTemplateStorage} from "./src/management/localStorage.js";
 
 window.onload = () => {
 
-    loadDataFromLocalStorage();
+    if (localStorage.data !== undefined || localStorage.length !== 0) {
+        loadDataFromLocalStorage();
+    } else {
+        setEmptyTemplateStorage();
+    }
 
 }
 

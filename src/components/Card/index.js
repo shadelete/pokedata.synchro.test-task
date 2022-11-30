@@ -1,11 +1,6 @@
 import './style.scss'
 import {appendMultiplyChild} from "../../services/templates.js";
 import {DetailedCard} from "../DetailedCard/index.js";
-import plus from "../../assets/img/plus.svg";
-
-export function createAddCard() {
-    return {id:0,name:'',picture: plus}
-}
 
 function Card(id) {
     const el = this.element = document.createElement('div');

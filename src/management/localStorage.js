@@ -1,60 +1,27 @@
-import {createAddCard, createNewCard} from "../components/Card/index.js";
-import plus from "../assets/img/plus.svg";
-import {pokeData} from "../data/pokeData.js";
-import {addCard} from "../components/Header/buttonsFunctions.js";
-
-export const pushAddCardToLocalStorage = () => {
-
-}
-
-export const Observer = (data) => {
-
-    const container = document.getElementById('main-wrapper');
-
-    const newStorage        = JSON.parse(data)
-    const currentlyStorage  = JSON.parse(localStorage.data);
-
-    if (newStorage.length !== currentlyStorage.length){
-        for(let i=0;i<newStorage.length;i++){
-            container.appendChild(createNewCard(newStorage[i]))
-        }
-    }
-
-}
+import {createNewCard} from "../components/Card/index.js";
 
 export const loadDataFromLocalStorage = () => {
 
     const container = document.getElementById('main-wrapper');
 
-    const newData = [];
+    const storage = JSON.parse(localStorage.data);
 
-
-    if (localStorage.data === undefined || localStorage.length === 0) {
-
-        newData.push({id:0,name:'',picture: plus})
-        localStorage.setItem("data",JSON.stringify(newData));
-
-    } else {
-
-        const storage = JSON.parse(localStorage.data);
-        newData.push(...storage);
-
+    for(let i=0;i<storage.length;i++){
+        container.appendChild(createNewCard(storage[i]))
     }
 
-    console.log(newData)
+}
 
-    for(let i=0;i<newData.length;i++){
-        container.appendChild(createNewCard(newData[i]))
-    }
-
-    container.firstElementChild.addEventListener('click',addCard);
+export const addItemsToHistoryStorage = (newItem) => {
+    const currentHistoryLocalStorage = JSON.parse(localStorage.history);
+    const newTempHistory = [...currentHistoryLocalStorage,newItem];
+    localStorage.setItem("history",JSON.stringify(newTempHistory));
 }
 
 export const addItemsToLocalStorage = (newItem) => {
-    const currentLocalStorage = [...JSON.parse(localStorage.data)];
-    const newTemp = [...currentLocalStorage,newItem];
-    localStorage.setItem("data",JSON.stringify(newTemp));
-    localStorage.setItem("history",JSON.stringify(newTemp));
+    const currentDataLocalStorage = JSON.parse(localStorage.data);
+    const newTempData = [...currentDataLocalStorage,newItem];
+    localStorage.setItem("data",JSON.stringify(newTempData));
 }
 
 export const removeLastItemFromLocalStorage = () => {
@@ -71,9 +38,11 @@ export const removeLastItemFromLocalStorage = () => {
 
 export const clearAllItemsFromLocalStorage = () => {
     const container = document.getElementById('main-wrapper');
-    pokeData.length = 0
-    localStorage.setItem('data','')
-    localStorage.setItem('data',JSON.stringify([createAddCard()]))
+    localStorage.setItem('data', "[]");
     container.innerHTML = ''
-    container.appendChild(createNewCard(createAddCard()))
+}
+
+export const setEmptyTemplateStorage = () => {
+    localStorage.setItem('data', '[]');
+    localStorage.setItem('history', '[]');
 }

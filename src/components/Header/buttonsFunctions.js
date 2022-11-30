@@ -4,6 +4,7 @@ import {getData} from "../../api/api.js";
 import {randomInt} from "../../services/random.js";
 import {pokeData} from "../../data/pokeData.js";
 import {
+    addItemsToHistoryStorage,
     addItemsToLocalStorage,
     clearAllItemsFromLocalStorage,
     removeLastItemFromLocalStorage
@@ -17,19 +18,13 @@ export const addCard = async () => {
 
     const res = await getData(randomInt(1,905));
 
-    pokeData.push({
-        id: res.id,
-        name: res.name,
-        picture: res.sprites.front_default
-    })
-
     container.removeChild(container.lastChild)
 
     container.appendChild(createNewCard({id:res.id,name:res.name,picture: res.sprites.front_default}))
 
     addItemsToLocalStorage({id: res.id,name:res.name,picture: res.sprites.front_default})
+    addItemsToHistoryStorage({id: res.id,name:res.name,picture: res.sprites.front_default})
 
-    console.log(JSON.parse(localStorage.data));
 }
 
 export const deleteCard = () => {
