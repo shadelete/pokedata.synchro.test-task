@@ -2,7 +2,6 @@ import {createNewCard} from "../Card/index.js";
 import preloader from "../../assets/img/preloader.svg";
 import {getData} from "../../api/api.js";
 import {randomInt} from "../../services/random.js";
-import {pokeData} from "../../data/pokeData.js";
 import {
     addItemsToHistoryStorage,
     addItemsToLocalStorage,
@@ -50,21 +49,22 @@ export const showHistory = () => {
 export const fillCards = async () => {
 
     const cards_wrapper = document.getElementById('main-wrapper');
+    const body = document.getElementById('app');
+
     const main = document.querySelector('.main');
     const card = document.querySelector('.card')
 
-    // if (
-    //
-    //     (main.offsetHeight - (cards_wrapper.lastElementChild.getBoundingClientRect().top + card.clientHeight)) > card.clientHeight
-    //     ||
-    //     (main.offsetWidth - (cards_wrapper.lastElementChild.getBoundingClientRect().left + card.clientWidth)) > card.clientWidth
-    //
-    // ) {
-    //     await this.addCard();
-    //     this.fillCards();
-    // } else {
-    //     this.fill.removeEventListener();
-    // }
+    if (
+
+        (body.offsetHeight - (cards_wrapper.lastElementChild.getBoundingClientRect().top + card.clientHeight)) > card.clientHeight
+        ||
+        (body.offsetWidth - (cards_wrapper.lastElementChild.getBoundingClientRect().left + card.clientWidth)) > card.clientWidth
+
+    ) {
+        await addCard();
+        fillCards();
+    } else {
+    }
 
 }
 
