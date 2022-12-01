@@ -48,17 +48,32 @@ export const showHistory = () => {
 export const fillToggle = () => {
 
     const button = event.currentTarget;
+    const wrapper = document.getElementById('main-wrapper');
 
     const infinityScroll = async () => {
-        if ( (window.scrollY !== window.innerHeight - document.body.offsetHeight) ) {
-            await fillCards();
+
+        if(window.outerWidth < 768) {
+            if ( (wrapper.scrollLeft !== window.innerWidth - document.body.offsetWidth) ) {
+                await fillCards()
+            }
+        } else {
+            if ( (window.scrollY !== window.innerHeight - document.body.offsetHeight) ) {
+                await fillCards();
+            }
         }
     }
 
     const buttonOn =  async () => {
         button.classList.add('fill-active');
         await fillCards();
-        window.onscroll = infinityScroll
+
+
+        if(window.outerWidth < 768) {
+            wrapper.onscroll = infinityScroll
+        } else {
+            window.onscroll = infinityScroll
+        }
+
     }
 
     const buttonOff = () => {
@@ -95,5 +110,3 @@ export const fillCards = async (state) => {
     }
 
 }
-
-

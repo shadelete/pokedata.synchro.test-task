@@ -20,7 +20,14 @@
 @media (max-width: 768px) {
   .main {
     &-wrapper {
-      grid-template-columns: repeat(2,1fr);
+      grid-template-columns: auto;
+      grid-auto-flow: column;
+      grid-template-rows: auto auto auto;
+      overflow-x: scroll;
+      justify-content: start;
+    }
+    &-wrapper::-webkit-scrollbar {
+      display: none;
     }
     &-card {
       text-align: center;
