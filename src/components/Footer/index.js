@@ -7,7 +7,7 @@ export const Footer = () => {
         `
             <div class="container">
               <div class="footer-wrapper">
-                  <p>Made with ❤ by shadelete </p>
+                  <p>Made with <span>❤</span> by <a href="https://github.com/shadelete" target="_blank">shadelete</a> </p>
               </div>	
             </div>
         `

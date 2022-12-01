@@ -1,5 +1,11 @@
 import './style.scss'
-import {addCard, clearCards, deleteCard, fillCards, showHistory} from "./buttonsFunctions.js";
+import {
+    addCard,
+    clearCards,
+    deleteCard,
+    fillToggle,
+    showHistory,
+} from "./buttonsFunctions.js";
 import {template} from "./headetTemplate.js";
 
 function createButton (text,id,event) {
@@ -18,7 +24,7 @@ export const Header = () => {
     const add           = new createButton('add','add',addCard);
     const del           = new createButton('del','del',deleteCard);
     const clear         = new createButton('clear','clear',clearCards);
-    const fill          = new createButton('fill','fill',fillCards);
+    const fill          = new createButton('fill','fill',fillToggle);
     const history       = new createButton('history','history',showHistory);
 
     header.innerHTML = template;

@@ -10,6 +10,10 @@
     padding: 1rem 0;
     justify-content: center;
     text-align: center;
+    & p span {
+      color: var(--danger);
+    }
+
   }
 }
 

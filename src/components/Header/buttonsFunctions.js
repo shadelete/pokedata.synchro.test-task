@@ -42,29 +42,58 @@ export const showHistory = () => {
     for(let i=0;i<storage.length;i++){
         wrapper.appendChild(createNewCard(storage[i]))
     }
-    console.log(wrapper);
     createModalWindow(wrapper);
 }
 
-export const fillCards = async () => {
+export const fillToggle = () => {
+
+    const button = event.currentTarget;
+
+    const infinityScroll = async () => {
+        if ( (window.scrollY !== window.innerHeight - document.body.offsetHeight) ) {
+            await fillCards();
+        }
+    }
+
+    const buttonOn =  async () => {
+        button.classList.add('fill-active');
+        await fillCards();
+        window.onscroll = infinityScroll
+    }
+
+    const buttonOff = () => {
+        button.classList.remove('fill-active');
+        window.onscroll = null;
+    }
+
+    button.classList.contains('fill-active') ? buttonOff() : buttonOn()
+}
+
+
+export const fillCards = async (state) => {
 
     const cards_wrapper = document.getElementById('main-wrapper');
     const body = document.getElementById('app');
+    const card = document.querySelector('.card');
 
-    const main = document.querySelector('.main');
-    const card = document.querySelector('.card')
+    const getLastCardViewportDetect = () => {
+        let rect = cards_wrapper.lastElementChild.getBoundingClientRect();
+        return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth) ||
+            (body.offsetWidth - (cards_wrapper.lastElementChild.getBoundingClientRect().left + card.clientWidth)) > card.clientWidth
+        );
+    }
 
     if (
-
-        (body.offsetHeight - (cards_wrapper.lastElementChild.getBoundingClientRect().top + card.clientHeight)) > card.clientHeight
-        ||
-        (body.offsetWidth - (cards_wrapper.lastElementChild.getBoundingClientRect().left + card.clientWidth)) > card.clientWidth
-
+        getLastCardViewportDetect()
     ) {
-        await addCard();
-        fillCards();
-    } else {
+       await addCard();
+       fillCards(true);
     }
 
 }
+
 
