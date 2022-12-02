@@ -11,18 +11,21 @@ import {createModalWindow} from "../../elements/modal/index.js";
 import {historyCard} from "../History/index.js";
 
 export const addCard = async () => {
+
     const container = document.getElementById('main-wrapper');
 
     container.appendChild(createNewCard({picture:preloader}))
 
-    const res = await getData(randomInt(1,905));
-
-    await container.removeChild(container.lastChild)
-
-    container.appendChild(createNewCard({id:res.id,name:res.name,picture: res.sprites.front_default}))
-
-    addItemsToLocalStorage({id: res.id,name:res.name,picture: res.sprites.front_default})
-    addItemsToHistoryStorage({id: res.id,name:res.name,picture: res.sprites.front_default})
+    await getData(randomInt(1,905))
+        .then((res)=>{
+            return res;
+        })
+        .then(async (res)=>{
+            container.removeChild(container.lastChild)
+            container.appendChild(createNewCard({id:res.id,name:res.name,picture: res.sprites.front_default}))
+            addItemsToLocalStorage({id: res.id,name:res.name,picture: res.sprites.front_default})
+            addItemsToHistoryStorage({id: res.id,name:res.name,picture: res.sprites.front_default})
+        })
 
 }
 

@@ -29,3 +29,13 @@
     max-width: 100px;
   }
 }
+
+@media (max-width: 768px) {
+  .card {
+    aspect-ratio: 1;
+    height: 105px;
+    & h1 {
+      font-size: initial;
+    }
+  }
+}
