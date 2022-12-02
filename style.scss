@@ -1,9 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
 
 :root {
-  --succes: #268a3d;
-  --warning: #ffc107;
-  --danger: #dc3545;
+  --primary: #0275d8;
+  --success: #5cb85c;
+  --info: #5bc0de;
+  --warning: #f0ad4e;
+  --danger: #d9534f;
+  --light: #f7f7f7;
+  --dark: #292b2c;
 
   --basic-width: 1200px;
 
@@ -45,5 +49,4 @@ button {
 .container {
   max-width: var(--basic-width);
   margin-inline: auto;
-  padding: 0 1rem;
 }

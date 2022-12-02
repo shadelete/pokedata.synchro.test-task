@@ -4,17 +4,17 @@ function ModalWindow() {
     const el = this.element = document.createElement('div');
     el.classList.add('modal');
     el.addEventListener('click',(e)=>{
-        if(e.target.getAttribute("class") === "modal"){
-            e.target.remove();
+        if(e.target.classList.contains("modal")){
+            el.remove();
         }
-    })
+    },true)
     return el;
 }
 
 function ModalInner(data) {
     const el = document.createElement('div');
     el.classList.add('modal-inner');
-    el.innerHTML = data.outerHTML;
+    el.appendChild(data)
     return el;
 }
 

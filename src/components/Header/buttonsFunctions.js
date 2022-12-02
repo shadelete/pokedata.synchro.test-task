@@ -4,8 +4,7 @@ import {getData} from "../../api/api.js";
 import {randomInt} from "../../services/random.js";
 import {
     addItemsToHistoryStorage,
-    addItemsToLocalStorage,
-    clearAllItemsFromLocalStorage,
+    addItemsToLocalStorage, clearAllItemsFromDataStorage,
     removeLastItemFromLocalStorage
 } from "../../management/localStorage.js";
 import {createModalWindow} from "../../elements/modal/index.js";
@@ -32,16 +31,14 @@ export const deleteCard = () => {
 }
 
 export const clearCards = () => {
-    clearAllItemsFromLocalStorage();
+    clearAllItemsFromDataStorage();
 }
 
 export const showHistory = () => {
 
     const storage = JSON.parse(localStorage.history);
 
-    const modal = historyCard(storage)
-
-    createModalWindow(modal);
+    createModalWindow(historyCard(storage));
 
 }
 

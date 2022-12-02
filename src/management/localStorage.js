@@ -36,7 +36,7 @@ export const removeLastItemFromLocalStorage = () => {
 
 }
 
-export const clearAllItemsFromLocalStorage = () => {
+export const clearAllItemsFromDataStorage = () => {
     const container = document.getElementById('main-wrapper');
     localStorage.setItem('data', "[]");
     container.innerHTML = ''
@@ -45,4 +45,24 @@ export const clearAllItemsFromLocalStorage = () => {
 export const setEmptyTemplateStorage = () => {
     localStorage.setItem('data', '[]');
     localStorage.setItem('history', '[]');
+}
+
+export const clearAllItemsFromHistoryStorage = () => {
+    const container = document.querySelector('.history-cards');
+    localStorage.setItem('history', "[]");
+    container.innerHTML = ''
+}
+
+export const retrieveFromHistoryToData = () => {
+
+    const container = document.querySelector('.history-cards');
+
+    const currentHistoryLocalStorage = JSON.parse(localStorage.history);
+    const currentDataLocalStorage = JSON.parse(localStorage.data);
+
+    const newTempHistory = [...currentHistoryLocalStorage,newItem];
+    localStorage.setItem("history",JSON.stringify(newTempHistory));
+
+    localStorage.setItem('history', "[]");
+    container.innerHTML = ''
 }

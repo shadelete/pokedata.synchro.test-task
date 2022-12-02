@@ -1,0 +1,62 @@
+.history {
+  background: whitesmoke;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 5px 0 rgb(0 0 0 / 7%), 0 2px 5px 0 rgb(0 0 0 / 4%);
+  transition: all 0.25s ease;
+  &-wrapper {
+    position: relative;
+  }
+  &-control {
+    display: flex;
+    justify-content: space-around;
+    position: sticky;
+    bottom: -1px;
+    background-color: white;
+    box-shadow: 0 0 5px 1px rgba(0,0,0,.07),0 2px 5px 1px rgba(0,0,0,.04);
+    text-transform: uppercase;
+    font-weight: bold;
+    & div {
+      cursor: pointer;
+      padding: .5rem 0;
+      transition: all .5s ease;
+    }
+    &-clear {
+      color: var(--danger);
+      flex-basis: 50%;
+      width: 100%;
+      text-align: center;
+      &:hover {
+        background-color: var(--danger);
+        color: whitesmoke;
+      }
+    }
+    &-retrieve {
+      color: var(--success);
+      flex-basis: 50%;
+      width: 100%;
+      text-align: center;
+      &:hover {
+        background-color: var(--success);
+        color: whitesmoke;
+      }
+    }
+  }
+  &-cards {
+
+  }
+}
+
+@media (max-width: 768px) {
+  .history {
+    &-wrapper {
+    }
+    &-control {
+      flex-direction: column-reverse;
+    }
+    &-cards {
+
+    }
+  }
+}

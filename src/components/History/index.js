@@ -1,8 +1,10 @@
 import {createNewCard} from "../Card/index.js";
 import {createModalWindow} from "../../elements/modal/index.js";
+import {clearHistory} from "./buttonsFunctions.js";
+import "./style.scss"
 
 export function CreateHistoryControl(className,text, event) {
-    const el = this.element = document.createElement('button');
+    const el = this.element = document.createElement('div');
     el.classList.add(className);
     el.innerText = text;
     el.addEventListener('click', event)
@@ -12,17 +14,18 @@ export function CreateHistoryControl(className,text, event) {
 const template =
     `
     <div class="history-wrapper">
-        <div class="history-control">             
-        </div>
         <div class="history-cards">             
+        </div>
+        <div class="history-control">             
         </div>
     </div> 
     `
 
-export const historyCard = (storage) => {
+export const historyCard = async (storage) => {
 
-    const clearHistory = new CreateHistoryControl('clear-history', 'clear');
-    const retrieveCards = new CreateHistoryControl('retrieve-history','retrieve' )
+
+    const clearHistoryButton = new CreateHistoryControl('history-control-clear', 'clear',clearHistory);
+    const retrieveCardsButton = new CreateHistoryControl('history-control-retrieve','retrieve' )
 
     const history = document.createElement('div')
     history.classList.add('history')
@@ -31,9 +34,8 @@ export const historyCard = (storage) => {
     const controlWrapper = history.querySelector('.history-control');
     const cardsWrapper = history.querySelector('.history-cards');
 
-    controlWrapper.appendChild(clearHistory);
-    controlWrapper.appendChild(retrieveCards);
-
+    controlWrapper.appendChild(clearHistoryButton);
+    controlWrapper.appendChild(retrieveCardsButton);
 
     for (let i = 0; i < storage.length; i++) {
         cardsWrapper.appendChild(createNewCard(storage[i]))

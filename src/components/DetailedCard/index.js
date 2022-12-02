@@ -6,6 +6,7 @@ export const DetailedCard = async (data) => {
 
     const response = await getData(data);
     const wrapper = document.createElement('div');
+    wrapper.classList.add('detailed-card');
 
     wrapper.innerHTML =
         `
