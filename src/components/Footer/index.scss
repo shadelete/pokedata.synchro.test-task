@@ -6,12 +6,16 @@
   background-color: white;
   box-shadow: 0 0 3px 0 rgba(0,0,0,.07),0 2px 2px 0 rgba(0,0,0,.04);
   &-wrapper {
+    color: black;
     display: flex;
     padding: 1rem 0;
     justify-content: center;
     text-align: center;
     & p span {
       color: var(--danger);
+    }
+    & p a {
+      color: black;
     }
 
   }

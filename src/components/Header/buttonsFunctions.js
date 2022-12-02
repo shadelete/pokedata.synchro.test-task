@@ -9,6 +9,7 @@ import {
     removeLastItemFromLocalStorage
 } from "../../management/localStorage.js";
 import {createModalWindow} from "../../elements/modal/index.js";
+import {historyCard} from "../History/index.js";
 
 export const addCard = async () => {
     const container = document.getElementById('main-wrapper');
@@ -17,7 +18,7 @@ export const addCard = async () => {
 
     const res = await getData(randomInt(1,905));
 
-    container.removeChild(container.lastChild)
+    await container.removeChild(container.lastChild)
 
     container.appendChild(createNewCard({id:res.id,name:res.name,picture: res.sprites.front_default}))
 
@@ -35,14 +36,13 @@ export const clearCards = () => {
 }
 
 export const showHistory = () => {
-    const storage = JSON.parse(localStorage.history).slice(1);
 
-    const wrapper = document.createElement('div')
-    wrapper.classList.add('header-history-wrapper')
-    for(let i=0;i<storage.length;i++){
-        wrapper.appendChild(createNewCard(storage[i]))
-    }
-    createModalWindow(wrapper);
+    const storage = JSON.parse(localStorage.history);
+
+    const modal = historyCard(storage)
+
+    createModalWindow(modal);
+
 }
 
 export const fillToggle = () => {
@@ -65,6 +65,8 @@ export const fillToggle = () => {
 
     const buttonOn =  async () => {
         button.classList.add('fill-active');
+
+        wrapper.children.length || await addCard();
         await fillCards();
 
 
@@ -79,6 +81,7 @@ export const fillToggle = () => {
     const buttonOff = () => {
         button.classList.remove('fill-active');
         window.onscroll = null;
+        wrapper.onscroll = null;
     }
 
     button.classList.contains('fill-active') ? buttonOff() : buttonOn()
