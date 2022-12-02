@@ -56,8 +56,9 @@ export const retrieveFromHistoryToData = () => {
     const currentHistoryLocalStorage = JSON.parse(localStorage.history);
     const currentDataLocalStorage = JSON.parse(localStorage.data);
 
-    const newTempHistory = currentDataLocalStorage
-        .concat(currentHistoryLocalStorage.slice(0,-currentDataLocalStorage.length));
+    const newTempHistory = currentDataLocalStorage.length >= 1
+        ? currentDataLocalStorage.concat(currentHistoryLocalStorage.slice(0,-currentDataLocalStorage.length))
+        : currentHistoryLocalStorage;
 
     localStorage.setItem("data",JSON.stringify(newTempHistory));
     localStorage.setItem('history', "[]");
