@@ -1,15 +1,11 @@
 import {createNewCard} from "../components/Card/index.js";
 
 export const loadDataFromLocalStorage = () => {
-
     const container = document.getElementById('main-wrapper');
-
     const storage = JSON.parse(localStorage.data);
-
     for(let i=0;i<storage.length;i++){
         container.appendChild(createNewCard(storage[i]))
     }
-
 }
 
 export const addItemsToHistoryStorage = (newItem) => {
@@ -54,15 +50,22 @@ export const clearAllItemsFromHistoryStorage = () => {
 }
 
 export const retrieveFromHistoryToData = () => {
-
-    const container = document.querySelector('.history-cards');
+    const containerCards = document.getElementById('main-wrapper');
+    const containerHistory = document.querySelector('.history-cards');
 
     const currentHistoryLocalStorage = JSON.parse(localStorage.history);
     const currentDataLocalStorage = JSON.parse(localStorage.data);
 
-    const newTempHistory = [...currentHistoryLocalStorage,newItem];
-    localStorage.setItem("history",JSON.stringify(newTempHistory));
+    const newTempHistory = currentDataLocalStorage
+        .concat(currentHistoryLocalStorage.slice(0,-currentDataLocalStorage.length));
 
+    localStorage.setItem("data",JSON.stringify(newTempHistory));
     localStorage.setItem('history', "[]");
-    container.innerHTML = ''
+
+    containerHistory.innerHTML = ''
+    containerCards.innerHTML = ''
+    for(let i=0;i<newTempHistory.length;i++){
+        containerCards.appendChild(createNewCard(newTempHistory[i]))
+    }
+    document.querySelector('.modal').remove()
 }

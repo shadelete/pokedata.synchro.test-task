@@ -1,6 +1,6 @@
 import {createNewCard} from "../Card/index.js";
 import {createModalWindow} from "../../elements/modal/index.js";
-import {clearHistory} from "./buttonsFunctions.js";
+import {clearHistory, retrieveHistory} from "./buttonsFunctions.js";
 import "./style.scss"
 
 export function CreateHistoryControl(className,text, event) {
@@ -25,7 +25,7 @@ export const historyCard = async (storage) => {
 
 
     const clearHistoryButton = new CreateHistoryControl('history-control-clear', 'clear',clearHistory);
-    const retrieveCardsButton = new CreateHistoryControl('history-control-retrieve','retrieve' )
+    const retrieveCardsButton = new CreateHistoryControl('history-control-retrieve','retrieve',retrieveHistory)
 
     const history = document.createElement('div')
     history.classList.add('history')
